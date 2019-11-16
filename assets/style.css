@@ -1,0 +1,51 @@
+body {
+    background-color: white;
+}
+
+.card {
+    background-color: white;
+    display: absolute;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    margin: auto;
+}
+
+#quizTitle {
+    font-family: 'Permanent Marker', cursive;
+    text-align: center;
+    padding: 5%;
+    margin: 20px;
+}
+
+#start {
+    background-color #ff4e00;
+    background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
+    color: white;
+    padding: 10px;
+    font-size: medium;
+    border-radius: 8px;
+    margin: 20px;
+    position: relative;
+    text-align: center;
+    align-content: center;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+#start:hover {
+    opacity: 0.6
+}
+
+.highScore  {
+    float: left;
+    width: 200px;
+    margin: 5px;
+}
+
+.timer  {
+    float: right;
+    text-align: right;
+    width: 200px;
+    margin: 5px;
+}
