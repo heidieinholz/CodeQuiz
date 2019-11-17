@@ -1,4 +1,4 @@
-#quizTitle {
+h1 {
     font-family: 'Permanent Marker', cursive;
     text-align: center;
     padding: 5%;
@@ -12,7 +12,6 @@
     padding: 10px;
     font-size: medium;
     border-radius: 8px;
-    margin: 20px;
     position: relative;
     text-align: center;
     align-content: center;
@@ -30,4 +29,8 @@
 
 ul {
     list-style-type: none;
+}
+
+.container {
+    align-content: center;
 }
