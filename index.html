@@ -13,36 +13,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/popper.min.js"></script>
 
     <title>Heidi's Code Quiz</title>
+    
 </head>
-<body>
-    <div class="highScore">
-        <a href="______">High Score</a>
-    </div>
-    <div class="timer">
-        <p>Seconds remaining:  </p>
-    </div>
-    
-    <div class="card" id="quizHeader">
-        <div class="card-body">
-            <div class="jumbotron text-center">
-                <h1 id="quizTitle">It's Code Quiz Time!</h2>
-            </div>
-            <button type="button" id="start" class="btn btn-primary btn-lg" href="#" role="button">Click to Start</button>
+<body class="bg-white">
+    <div class="row">
+        <div class="col-6">
+            <span id="High scores" class="space">High Scores</span>
         </div>
-    
-    <div class="card">
-        <div class="card-body">
-            <div class="quizContainer">
-                
-            </div>
+        <div class="col-6">
+            <span id="timer" class="space">Seconds remaining: 75</span>>
         </div>
     </div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 id="question">It's Code Quiz Time!</h2>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-12">
+                <p id="details">Try to answer the following code-related questions within the time limit.</p>
+            </div>
+        </div>
+
+        <div class="row" id="answer-row">
+            <div class="col-12 text-center" id="answer-col">
+                <div id="start-area"><button id="btn btn-warning">Start Quiz</button></div>
+                <ul id="answer-list">
+                </ul>
+            </div>
+        </div>
 
 
+    </div>
+
+    <div id="space-correct"></div>
+    <div id="correct"></div>
+    <div id="blank"></div>
+   
 
 
-<script src="script.js"></script>
-<script src="questions.js"></script>
+    <script src="script.js"></script>
+    <script src="questions.js"></script>
 
 </body>
 </html>
