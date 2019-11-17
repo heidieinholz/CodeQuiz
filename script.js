@@ -1,3 +1,4 @@
+//define variables
 var questionEl = document.getElementById("question");
 var startButton = document.getElementById("start");
 var detailsEl = document.getElementById("details");
@@ -16,49 +17,56 @@ var scoreLog;
 var secondsLeft = 75;
 var interval;
 
+//on click, the start button begins the quiz
 startButton.addEventListener("click", startQuiz);
 
+//when quiz starts, the timer counts down
 function startQuiz() {
     firstQuestion()
     interval = setInterval(function() {
         secondsLeft--;
         var timeLeft = Math.floor(secondsLeft)
         timerEl.textContent = "Time remaining: " + timeLeft;
-
+        
         stopQuiz();
     }, 1000)
 }
-
+//when no time remains, clear the space and correct area and show the "all done" page 
 function stopQuiz() {
-    if(secondsLeft <= -100) {
+    if(secondsLeft <= 0) {
         clearInterval(interval);
         spaceArea.innerHTML = "";
         correctArea.innerHTML = "";
         allDone();
     }
 }
-
+//this is the page that display at the end of the game
 function allDone() {
     questionEl.textContent = "All Done!";
+    //your remaining time is your score
     scoreNum = secondsLeft;
     detailsEl.textContent = "Your final score is " + scoreNum + ".";
     answerListEl.innerHTML = "";
+    //text box for the high score registry
     var labelEl = document.createElement("label");
     labelEl.textContent = "Enter Initials:     ";
     startArea.appendChild(labelEl);
+    //input initials
     var inputEl = document.createElement("input");
     inputEl.setAttribute("id", "initials");
     startArea.appendChild(inputEl);
+    //submit initials
     var submitButton = document.createElement("button");
     submitButton.setAttribute("id", "submit");
     submitButton.setAttribute("class", "btn btn-warning");
     submitButton.textContent = "Submit";
     startArea.appendChild(submitButton);
 
+    //on click, take initials and score and add to local storage ***ERROR HERE, NOT WORKING***
     submitButton.addEventListener("click", function(event) {
         event.preventDefault
         var initialsEl = document.getElementById("initials");
-        var initials = initialsEl.nodeValue.trim();
+        var initials = initialsEl.value.trim();
         scoreLog = initials + "-" + scoreNum;
         if(window.localStorage.getItem("scoreNum")<scoreNum) {
             window.localStorage.setItem("scoreLog", scoreLog);
@@ -84,7 +92,7 @@ function allDone() {
         goBackButton.addEventListener("click", goBackFunction);
     })
 }
-
+//on click, this function restarts the quiz ***ERROR HERE, NOT WORKING***
 function goBackFunction() {
     startArea.innerHTML = "";
     startArea.appendChild(startButton);
@@ -94,9 +102,10 @@ function goBackFunction() {
     secondsLeft = 75;
     timerEl.textContent = "Time remaining: 75"
 }
-
+//on click, generate the questions to choose from
 answerListEl.addEventListener("click", questionQuiz);
 
+//on click, 
 highScoreEl.addEventListener("click", function(){
     questionEl.textContent = "High Score!";
     detailsEl.textContent = localStorage.getItem("scoreLog");
@@ -108,7 +117,7 @@ highScoreEl.addEventListener("click", function(){
     goBackButton2.addEventListener("click", goBackFunction);
 
 })
-
+//how the quiz works
 function questionQuiz(event) {
     elementAnswer = event.target;
     if(questionNumber < questions.length && elementAnswer.matches("button") === true) {
@@ -144,7 +153,7 @@ function questionQuiz(event) {
         allDone();
     }
  }
-
+//how the questions appear
  function firstQuestion() {
      questionEl.textContent = questions[questionNumber].title;
      detailsEl.textContent = "";

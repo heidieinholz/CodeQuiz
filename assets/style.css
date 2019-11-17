@@ -1,3 +1,7 @@
+body {
+    margin: 5% 10% 5% 10%;
+    font-family: Arial, Helvetica, sans-serif;
+}
 h1 {
     font-family: 'Permanent Marker', cursive;
     text-align: center;
@@ -12,7 +16,6 @@ h1 {
     padding: 10px;
     font-size: medium;
     border-radius: 8px;
-    position: relative;
     text-align: center;
     align-content: center;
     opacity: 1;
@@ -29,8 +32,4 @@ h1 {
 
 ul {
     list-style-type: none;
-}
-
-.container {
-    align-content: center;
 }
