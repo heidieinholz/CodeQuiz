@@ -62,18 +62,20 @@ function allDone() {
     submitButton.textContent = "Submit";
     startArea.appendChild(submitButton);
 
-    //on click, take initials and score and add to local storage ***ERROR HERE, NOT WORKING***
+    //on click, take initials and score and add to local storage
     submitButton.addEventListener("click", function(event) {
         event.preventDefault
         var initialsEl = document.getElementById("initials");
         var initials = initialsEl.value.trim();
-        scoreLog = initials + "-" + scoreNum;
-        if(window.localStorage.getItem("scoreNum")<scoreNum) {
-            window.localStorage.setItem("scoreLog", scoreLog);
-            window.localStorage.setItem("scoreNum", scoreNum);
-        }
+        var scoreObject = {
+            initials:initials,
+            scoreNum:scoreNum
+        };
+        var allScores = JSON.parse(window.localStorage.getItem("allScores")) || [];
+        allScores.push(scoreObject);
+        window.localStorage.setItem("allScores", JSON.stringify(allScores));
+
         questionEl.textContent = "High Score!"
-        detailsEl.textContent = window.localStorage.getItem("scorelog");
         startArea.innerHTML = "";
         var goBackButton = document.createElement("button");
         goBackButton.setAttribute("class", "btn btn-warning");
@@ -84,13 +86,13 @@ function allDone() {
         clearButton.textContent = "Clear";
         startArea.appendChild(clearButton);
         clearButton.addEventListener("click", function() {
-            window.localStorage.removeItem("scoreLog");
-            window.localStorage.removeItem("scoreNum");
+            window.localStorage.removeItem("allScores");
             detailsEl.textContent = "";
         })
 
         goBackButton.addEventListener("click", goBackFunction);
     })
+
 }
 //on click, this function restarts the quiz ***ERROR HERE, NOT WORKING***
 function goBackFunction() {
@@ -100,15 +102,25 @@ function goBackFunction() {
     detailsEl.textContent = "Try to answer the following code-related questions within the time limit."
     questionNumber = 0;
     secondsLeft = 75;
-    timerEl.textContent = "Time remaining: 75"
+    timerEl.textContent = "Time remaining: 75";
+    firstQuestion();
+
 }
 //on click, generate the questions to choose from
 answerListEl.addEventListener("click", questionQuiz);
 
-//on click, 
+//after submitting your initials, high scores should be displayed  ***ERROR HERE, NOT WORKING***
 highScoreEl.addEventListener("click", function(){
     questionEl.textContent = "High Score!";
     detailsEl.textContent = localStorage.getItem("scoreLog");
+    var highScores = JSON.parse(window.localStorage.getItem("allScores"));
+    console.log(highScores);
+    for (i = 0; i < highScores.length; i++) {
+        var liTag = document.createElement("li");
+        liTag.innerHTML = highScores[i].initials + ": " + highScores[i].scoreNum;
+        document.getElementById("high-scores").appendChild(liTag);
+    }
+
     startArea.innerHTML = "";
     var goBackButton2 = document.createElement("button");
     goBackButton2.setAttribute("class", "btn btn-warning");
